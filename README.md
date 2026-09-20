@@ -30,7 +30,7 @@ Copy, phone/email, socials and founder details live in `src/config/site.ts`.
 
 ## Structure
 
-- `src/layouts/Base.astro` — HTML shell, fonts, `<SEO>` and `<Analytics>`.
+- `src/layouts/Base.astro` — HTML shell, fonts, `<SEO>`, PostHog/GA `<Analytics>` and Vercel `<VercelAnalytics>`.
 - `src/components/SEO.astro` — title/description, canonical, Open Graph, Twitter, JSON-LD (Organization, WebSite).
 - `src/pages/api/contact.ts` — server-rendered Resend endpoint with honeypot + validation.
 - `src/emails/ContactSubmission.tsx` — React Email template for the notification (`npm run email` previews it at :3001).
