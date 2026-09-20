@@ -69,7 +69,7 @@ git-ignored). On Vercel these are set on the project:
 - `RESEND_API_KEY`, `RESEND_EMAIL_DOMAIN` — injected by the Vercel Resend
   Marketplace integration. Sending domain is `mail.goldenrecruiting.com`
   (a subdomain, so the root domain's mail is untouched).
-- `CONTACT_TO_EMAIL` — inbox for form submissions (`briana@goldenrecruiting.com`).
+- `CONTACT_TO_EMAIL` — inbox for form submissions (`bri@goldenrecruiting.com`).
 - `CONTACT_FROM_EMAIL` — optional; defaults to `Golden Recruiting <contact@$RESEND_EMAIL_DOMAIN>`.
 
 Never commit `.env*` (only `.env.example`). `PUBLIC_*` vars are browser-visible by design.
