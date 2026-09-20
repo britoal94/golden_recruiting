@@ -1,7 +1,10 @@
 # Dependabot keeps npm packages and GitHub Actions current.
 # Minor/patch bumps are grouped into one weekly PR and auto-merged by
 # .github/workflows/dependabot-auto-merge.yml once check + build pass.
-# Major bumps get their own PR and wait for a human.
+# Major bumps get their own PR: devDependency majors auto-merge when green
+# (a PR that fails, e.g. TypeScript 7 until @astrojs/check supports it, just
+# stays open and re-tests on every weekly rebase); production majors wait
+# for a human.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -25,10 +28,6 @@ updates:
       tailwind-major:
         patterns: ["tailwindcss", "@tailwindcss/*"]
         update-types: ["major"]
-    ignore:
-      # @astrojs/check pins typescript to ^5 || ^6; revisit when it supports 7.
-      - dependency-name: typescript
-        update-types: ["version-update:semver-major"]
     labels: ["dependencies"]
     commit-message:
       prefix: "chore(deps)"

@@ -45,8 +45,10 @@ what Vercel builds with — so every npm script runs the Astro CLI through
   Minor/patch bumps are grouped into a single PR after a 5-day cooldown;
   majors get separate PRs after 14 days.
 - `.github/workflows/dependabot-auto-merge.yml` — runs `astro check` + build on
-  each Dependabot PR and squash-merges minor/patch bumps when green. Majors get
-  a comment and wait for a human.
+  each Dependabot PR, then squash-merges minor/patch bumps and devDependency
+  majors when green. Production majors get a comment and wait for a human.
+  A PR that fails (e.g. TypeScript 7 until `@astrojs/check` supports it) stays
+  open with one explanatory comment and is re-tested on every weekly rebase.
 - `.github/workflows/ci.yml` — check + build on every push and PR.
 
 ## Scripts
