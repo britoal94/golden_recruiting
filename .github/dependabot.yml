@@ -25,6 +25,10 @@ updates:
       tailwind-major:
         patterns: ["tailwindcss", "@tailwindcss/*"]
         update-types: ["major"]
+    ignore:
+      # @astrojs/check pins typescript to ^5 || ^6; revisit when it supports 7.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     labels: ["dependencies"]
     commit-message:
       prefix: "chore(deps)"
