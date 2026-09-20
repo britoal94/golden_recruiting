@@ -2,12 +2,14 @@
 
 Marketing site for Golden Recruiting — Astro 7 + Tailwind CSS 4, deployed on Vercel.
 
+**Live:** https://goldenrecruiting.com · Vercel project `golden-recruiting` · every push to `main` deploys.
+
 ## Develop
 
 ```sh
-nvm use                # Node 26 (.nvmrc) — Temporal is native there
+nvm use                          # Node 26 (.nvmrc) — Temporal is native there
 npm install
-cp .env.example .env   # fill in keys as they arrive
+npx vercel link && npx vercel env pull .env.local   # or copy .env.example → .env
 npm run dev
 ```
 
@@ -22,9 +24,11 @@ flag and fails with a clear error — use Node 26 for background mode.
 | `SITE_URL` | Canonical origin (no trailing slash). Drives canonical/OG URLs, sitemap and robots.txt. |
 | `PUBLIC_POSTHOG_KEY` / `PUBLIC_POSTHOG_HOST` | PostHog project key + host. Tracker is only injected when the key is set. |
 | `PUBLIC_GA_ID` | Google Analytics 4 measurement ID (`G-XXXX`). Only injected when set. |
-| `RESEND_API_KEY` | Resend API key for the contact form (`/api/contact`). |
-| `CONTACT_TO_EMAIL` | Inbox that receives contact-form submissions. |
-| `CONTACT_FROM_EMAIL` | Sender, must be on a verified Resend domain. Defaults to `onboarding@resend.dev` (test only). |
+| `RESEND_API_KEY` / `RESEND_EMAIL_DOMAIN` | Injected by the Vercel Resend Marketplace integration. Sending domain: `mail.goldenrecruiting.com`. |
+| `CONTACT_TO_EMAIL` | Inbox that receives contact-form submissions (`Bri@goldenrecruiting.com`). |
+| `CONTACT_FROM_EMAIL` | Optional sender override. Defaults to `Golden Recruiting <contact@$RESEND_EMAIL_DOMAIN>`. |
+
+Vercel Web Analytics is on via `@vercel/analytics/astro` (no key needed).
 
 Copy, phone/email, socials and founder details live in `src/config/site.ts`.
 
@@ -32,10 +36,19 @@ Copy, phone/email, socials and founder details live in `src/config/site.ts`.
 
 - `src/layouts/Base.astro` — HTML shell, fonts, `<SEO>`, PostHog/GA `<Analytics>` and Vercel `<VercelAnalytics>`.
 - `src/components/SEO.astro` — title/description, canonical, Open Graph, Twitter, JSON-LD (Organization, WebSite).
-- `src/pages/api/contact.ts` — server-rendered Resend endpoint with honeypot + validation.
+- `src/pages/api/contact.ts` — server-rendered Resend endpoint with honeypot, validation and an idempotency key.
 - `src/emails/ContactSubmission.tsx` — React Email template for the notification (`npm run email` previews it at :3001).
 - `src/pages/robots.txt.ts` — generated robots.txt pointing at the sitemap.
 - `scripts/gen-assets.mjs` — regenerates `public/og.png`, `logo.png` and favicons from the seal mark.
+- `vercel.json` — immutable caching for `/_astro/*` plus security headers.
+
+## Domain & email
+
+- `goldenrecruiting.com` is canonical; `www` 308-redirects to it. DNS at NameBright
+  (A records to Vercel, `www` CNAME to Vercel).
+- The contact form sends from `contact@mail.goldenrecruiting.com` (Resend, DKIM/SPF
+  verified on the `mail.` subdomain) to `CONTACT_TO_EMAIL`, with reply-to set to the
+  submitter. The root domain's MX/SPF are for Bri's mailbox and are managed separately.
 
 ## Node & Temporal
 
