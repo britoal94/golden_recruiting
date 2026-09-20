@@ -1,0 +1,23 @@
+---
+/** Hallmark seal — the brand mark. Recruiting = certifying talent, like an assay stamp on gold. */
+interface Props {
+  class?: string;
+  /** Thicker strokes for small renders (nav), thinner for large (hero). */
+  weight?: 'regular' | 'light';
+}
+const { class: className = 'w-8 h-8', weight = 'regular' } = Astro.props;
+const w = weight === 'light' ? [1.2, 0.8, 1.4] : [1.4, 1, 1.6];
+---
+
+<svg
+  class:list={['shrink-0 stroke-gold', className]}
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="24" cy="24" r="21" stroke-width={w[0]}></circle>
+  <circle cx="24" cy="24" r="15.5" stroke-width={w[1]}></circle>
+  <path d="M17 24.5L21.5 29L31.5 18" stroke-width={w[2]} stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>

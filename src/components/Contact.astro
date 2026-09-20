@@ -1,0 +1,105 @@
+---
+import { site } from '../config/site';
+
+const rows = [
+  { label: 'Phone', value: site.contact.phone, href: site.contact.phone ? `tel:${site.contact.phone.replace(/[^+\d]/g, '')}` : '' },
+  { label: 'Email', value: site.contact.email, href: site.contact.email ? `mailto:${site.contact.email}` : '' },
+  { label: 'Location', value: `${site.location.city}, ${site.location.region}`, href: '' },
+].filter((r) => r.value);
+
+const fieldClass =
+  'w-full rounded-[3px] border border-line bg-bg-raised px-[13px] py-[11px] font-sans text-[15px] text-ink outline-none transition-colors focus:border-gold';
+---
+
+<section id="contact" class="py-16 sm:py-20" aria-labelledby="contact-heading">
+  <div class="wrap grid gap-10 md:grid-cols-2 md:gap-14">
+    <div>
+      <h2 id="contact-heading" class="mb-3 font-serif text-[clamp(26px,3vw,34px)] font-medium leading-[1.2]">Start a conversation</h2>
+      <p class="mb-6 max-w-[40ch] text-ink-dim">
+        Whether you're hiring or looking for your next role, tell us a little about what you need and we'll follow up directly.
+      </p>
+      <dl>
+        {rows.map((r) => (
+          <div class="flex justify-between gap-4 border-t border-line py-3.5 text-[15px]">
+            <dt class="text-ink-dim">{r.label}</dt>
+            <dd class="text-right">{r.href ? <a href={r.href} class="no-underline hover:text-gold-bright">{r.value}</a> : r.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <form id="contact-form" action="/api/contact" method="post" class="flex flex-col gap-3.5" novalidate>
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="text-[13.5px] text-ink-dim">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required maxlength="120" class={fieldClass} />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="email" class="text-[13.5px] text-ink-dim">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" class={fieldClass} />
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="role" class="text-[13.5px] text-ink-dim">I am</label>
+        <select id="role" name="role" class={fieldClass}>
+          <option>Hiring for a role</option>
+          <option>Looking for a role</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="message" class="text-[13.5px] text-ink-dim">Message</label>
+        <textarea id="message" name="message" required maxlength="5000" class:list={[fieldClass, 'min-h-[90px] resize-y']}></textarea>
+      </div>
+      <!-- Honeypot: hidden from people, filled by bots -->
+      <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <button type="submit" class="btn cursor-pointer disabled:cursor-wait disabled:opacity-60">Send</button>
+      <p id="form-msg" class="min-h-5 text-sm text-gold-bright" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const msg = document.getElementById('form-msg');
+  const button = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+  // No-JS fallback: the server redirects back with ?sent=1 or ?error=1.
+  const params = new URLSearchParams(location.search);
+  if (msg && params.has('sent')) msg.textContent = "Thanks — we'll be in touch shortly.";
+  if (msg && params.has('error')) msg.textContent = 'Something went wrong. Please email us directly.';
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!msg || !button) return;
+
+    if (!form.reportValidity()) return;
+
+    button.disabled = true;
+    msg.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (res.ok && data.ok) {
+        msg.textContent = "Thanks — we'll be in touch shortly.";
+        form.reset();
+        window.posthog?.capture?.('contact_form_submitted');
+        window.gtag?.('event', 'generate_lead', { method: 'contact_form' });
+      } else {
+        msg.textContent = data.error ?? 'Something went wrong. Please try again or email us directly.';
+      }
+    } catch {
+      msg.textContent = 'Network error. Please try again.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

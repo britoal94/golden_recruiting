@@ -1,0 +1,113 @@
+---
+/**
+ * All <head> SEO tags for a page: title/description, canonical, Open Graph,
+ * Twitter card, robots, and JSON-LD structured data.
+ */
+import { site } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path-relative or absolute OG image. Defaults to /og.png */
+  image?: string;
+  /** Set true on pages that should not be indexed (e.g. thank-you pages). */
+  noindex?: boolean;
+  /** Extra JSON-LD objects to emit alongside the site-wide ones. */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  image = '/og.png',
+  noindex = false,
+  jsonLd = [],
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL(image, Astro.site).toString();
+const siteUrl = Astro.site!.toString();
+
+const sameAs = Object.values(site.social).filter(Boolean);
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': ['Organization', 'ProfessionalService', 'EmploymentAgency'],
+  '@id': `${siteUrl}#organization`,
+  name: site.name,
+  legalName: site.legalName,
+  url: siteUrl,
+  logo: new URL('/logo.png', Astro.site).toString(),
+  image: ogImage,
+  description: site.description,
+  foundingDate: String(site.foundingYear),
+  founder: {
+    '@type': 'Person',
+    name: site.founder.name,
+    jobTitle: 'Founder',
+    worksFor: { '@id': `${siteUrl}#organization` },
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: site.location.city,
+    addressRegion: site.location.region,
+    addressCountry: site.location.country,
+  },
+  areaServed: { '@type': 'Country', name: 'United States' },
+  knowsAbout: [
+    'Financial advisor recruiting',
+    'Wealth management recruiting',
+    'Executive search',
+    'Recruitment process outsourcing',
+  ],
+  ...(site.contact.phone ? { telephone: site.contact.phone } : {}),
+  ...(site.contact.email ? { email: site.contact.email } : {}),
+  ...(sameAs.length ? { sameAs } : {}),
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}#website`,
+  url: siteUrl,
+  name: site.name,
+  publisher: { '@id': `${siteUrl}#organization` },
+  inLanguage: 'en-US',
+};
+
+const schemas = [organization, website, ...jsonLd];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+<meta name="author" content={site.name} />
+<meta name="theme-color" content="#15140f" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#faf7f0" media="(prefers-color-scheme: light)" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.locale} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${site.name} — ${site.tagline}`} />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Geo hints for local search -->
+<meta name="geo.region" content={`${site.location.country}-${site.location.region}`} />
+<meta name="geo.placename" content={site.location.city} />
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

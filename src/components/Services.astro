@@ -1,0 +1,41 @@
+---
+import SectionHead from './SectionHead.astro';
+
+const services = [
+  {
+    title: 'RPO',
+    mark: 'Recruitment Process Outsourcing',
+    body: 'We embed as an extension of your talent acquisition function for ongoing or high-volume hiring — running sourcing, screening, and pipeline management end to end under a defined program, rather than search by search.',
+  },
+  {
+    title: 'Container Search',
+    mark: 'Hybrid',
+    body: 'An upfront engagement fee secures our dedicated time and priority sourcing for a specific search, credited against the placement fee — retained-level focus without the full investment or exclusivity of a traditional retainer.',
+  },
+  {
+    title: 'Contingent Search',
+    mark: 'Invest on placement',
+    body: 'You invest once a candidate is placed — ideal for opportunistic searches or when you want to test the relationship before committing further.',
+  },
+];
+---
+
+<section id="services" class="border-b border-line py-16 sm:py-20" aria-labelledby="services-heading">
+  <div class="wrap">
+    <SectionHead id="services-heading" title="Services">
+      Three ways to engage us, depending on how much of the search you want us to own and how the fee is structured.
+    </SectionHead>
+
+    <div class="grid gap-px border border-line bg-line">
+      {services.map((s) => (
+        <article class="bg-bg px-6 py-8 sm:px-[30px]">
+          <h3 class="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 font-serif text-[21px] font-medium">
+            {s.title}{' '}
+            <span class="font-sans text-sm text-gold">{s.mark}</span>
+          </h3>
+          <p class="text-[15px] text-ink-dim">{s.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

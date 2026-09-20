@@ -1,0 +1,74 @@
+---
+import Seal from './Seal.astro';
+import { site, nav } from '../config/site';
+---
+
+<header class="sticky top-0 z-20 border-b border-line bg-bg/[.88] backdrop-blur-md">
+  <div class="wrap flex items-center justify-between gap-4 py-4">
+    <a href="#top" class="flex items-center gap-3 whitespace-nowrap font-serif text-[21px] tracking-[0.01em] no-underline" aria-label={`${site.name} — back to top`}>
+      <Seal class="h-[30px] w-[30px]" />
+      <span>{site.name}</span>
+    </a>
+
+    <nav class="hidden items-center gap-6 text-[14.5px] whitespace-nowrap text-ink-dim lg:flex xl:gap-8" aria-label="Primary">
+      {nav.map((item) => (
+        <a href={item.href} class="no-underline transition-colors duration-150 hover:text-gold-bright focus-visible:text-gold-bright">{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="#contact" class="btn hidden whitespace-nowrap sm:inline-flex">Start a search</a>
+      <button
+        type="button"
+        id="menu-toggle"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-[3px] border border-line text-ink lg:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path class="icon-open" d="M4 7h16M4 12h16M4 17h16" />
+          <path class="icon-close hidden" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="hidden border-t border-line bg-bg lg:hidden" aria-label="Mobile">
+    <div class="wrap flex flex-col py-2">
+      {nav.map((item) => (
+        <a href={item.href} class="border-b border-line py-3.5 text-[16px] text-ink no-underline last:border-b-0 hover:text-gold-bright">{item.label}</a>
+      ))}
+      <a href="#contact" class="btn mt-3 mb-2 sm:hidden">Start a search</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const openIcon = toggle?.querySelector('.icon-open');
+  const closeIcon = toggle?.querySelector('.icon-close');
+
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    menu.classList.toggle('hidden', !open);
+    openIcon?.classList.toggle('hidden', open);
+    closeIcon?.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Close after choosing a section, on Escape, or when resizing up to desktop.
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+</script>

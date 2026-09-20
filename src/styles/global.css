@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* Brand tokens. Dark is the default; light follows the OS preference
+   unless <html data-theme="dark"> forces it. */
+:root {
+  --ink: #f4efe4;
+  --ink-dim: #b9b2a1;
+  --bg: #15140f;
+  --bg-raised: #1c1a13;
+  --gold: #c79a3d;
+  --gold-bright: #e0b862;
+  --line: #38352a;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink: #1c1a13;
+    --ink-dim: #5c5646;
+    --bg: #faf7f0;
+    --bg-raised: #f1ebdd;
+    --gold: #a97b1f;
+    --gold-bright: #8a6416;
+    --line: #ddd4bd;
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ink: #f4efe4;
+  --ink-dim: #b9b2a1;
+  --bg: #15140f;
+  --bg-raised: #1c1a13;
+  --gold: #c79a3d;
+  --gold-bright: #e0b862;
+  --line: #38352a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-line: var(--line);
+
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-plex);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* keep anchored sections clear of the sticky nav */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased leading-relaxed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
+  }
+}
+
+@utility wrap {
+  @apply mx-auto w-full max-w-[1080px] px-4 sm:px-7;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center rounded-[3px] border border-gold bg-gold px-[22px] py-[11px] font-sans text-[14.5px] font-medium text-bg no-underline transition-colors duration-150 hover:bg-gold-bright hover:border-gold-bright;
+}
+
+@utility btn-ghost {
+  @apply border-line bg-transparent text-ink hover:border-gold hover:bg-transparent hover:text-gold-bright;
+}

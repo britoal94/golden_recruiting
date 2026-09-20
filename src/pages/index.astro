@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Verticals from '../components/Verticals.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import Why from '../components/Why.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+
+const siteUrl = Astro.site!.toString();
+
+// Page-specific structured data: the services offered, as an ItemList of Service nodes.
+const servicesLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Recruiting services',
+  itemListElement: [
+    ['Recruitment Process Outsourcing (RPO)', 'Embedded talent acquisition for ongoing or high-volume hiring.'],
+    ['Container Search', 'Hybrid engagement: an upfront fee credited against the placement fee.'],
+    ['Contingent Search', 'Fee due only once a candidate is placed.'],
+  ].map(([name, description], i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name,
+      description,
+      serviceType: 'Recruiting',
+      provider: { '@id': `${siteUrl}#organization` },
+      areaServed: { '@type': 'Country', name: 'United States' },
+    },
+  })),
+};
+---
+
+<Base title={`${site.name} — Financial Advisor & Financial Services Recruiting, Charlotte NC`} jsonLd={[servicesLd]}>
+  <Nav />
+  <main id="main">
+    <div id="top"></div>
+    <Hero />
+    <About />
+    <Verticals />
+    <Services />
+    <Process />
+    <Why />
+    <Contact />
+  </main>
+  <Footer />
+</Base>

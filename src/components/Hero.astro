@@ -1,0 +1,30 @@
+---
+import Seal from './Seal.astro';
+import { site } from '../config/site';
+---
+
+<section class="border-b border-line py-16 sm:py-20 lg:py-24" aria-labelledby="hero-heading">
+  <div class="wrap grid items-end gap-10 md:grid-cols-[1.5fr_1fr] md:gap-14">
+    <div>
+      <p class="mb-4 text-sm text-gold">{site.location.city}, {site.location.region} · Financial services recruiting</p>
+      <h1 id="hero-heading" class="mb-6 max-w-[15ch] font-serif text-[clamp(38px,5.4vw,64px)] font-medium leading-[1.08]">
+        {site.tagline}
+      </h1>
+      <p class="mb-8 max-w-[46ch] text-[18.5px] text-ink-dim">
+        Golden Recruiting specializes in recruiting experienced advisors with portable books for banks and wealth-management platforms — plus the associate advisors, client service, and business development talent behind them — alongside sales and executive searches, running every search end to end, from first outreach to signed offer.
+      </p>
+      <div class="flex flex-wrap gap-3.5">
+        <a href="#contact" class="btn">I'm hiring</a>
+        <a href="#contact" class="btn btn-ghost">I'm looking for a role</a>
+      </div>
+    </div>
+
+    <aside class="border-t border-line pt-7 md:border-t-0 md:border-l md:pt-0 md:pl-8">
+      <Seal class="mb-4 h-[54px] w-[54px]" weight="light" />
+      <p class="mb-2.5 font-serif text-[19px] italic text-ink">
+        Every advisor and candidate we submit has been interviewed, licensing-checked, and matched against your brief before you see their name.
+      </p>
+      <span class="text-[13.5px] text-ink-dim">— Our standard for every search</span>
+    </aside>
+  </div>
+</section>

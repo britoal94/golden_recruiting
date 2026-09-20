@@ -1,0 +1,14 @@
+---
+interface Props {
+  id: string;
+  title: string;
+}
+const { id, title } = Astro.props;
+---
+
+<div class="mb-10 grid gap-4 md:mb-12 md:grid-cols-[1fr_1.6fr] md:gap-10">
+  <h2 id={id} class="font-serif text-[clamp(26px,3vw,34px)] font-medium leading-[1.2]">{title}</h2>
+  {Astro.slots.has('default') && (
+    <p class="max-w-[52ch] text-base text-ink-dim"><slot /></p>
+  )}
+</div>

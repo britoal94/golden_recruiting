@@ -1,0 +1,26 @@
+---
+import SectionHead from './SectionHead.astro';
+
+const reasons = [
+  { title: 'Deep in advisor recruiting', body: 'We know the business of advisor recruiting well enough to tell a real fit from a resume that just checks boxes.' },
+  { title: 'We work searches, not a pipeline dump', body: "Every submission has already been screened for fit against your specific brief — we'd rather send you three strong candidates than thirty average ones." },
+  { title: "Direct line to who's running your search", body: 'You work with the person actually sourcing and vetting your candidates, not a rotating account team.' },
+  { title: 'Built on outbound, not job-board luck', body: 'Most of our strongest placements never applied anywhere — we found them, and made the case for the move.' },
+  { title: 'Charlotte-based, nationally active', body: "Local roots with searches running across the country, in person where it matters and remote where it's faster." },
+];
+---
+
+<section id="why" class="border-b border-line py-16 sm:py-20" aria-labelledby="why-heading">
+  <div class="wrap">
+    <SectionHead id="why-heading" title="Why work with Golden" />
+
+    <dl>
+      {reasons.map((r) => (
+        <div class="grid gap-1.5 border-t border-line py-5 first:border-t-0 sm:grid-cols-[220px_1fr] sm:gap-7">
+          <dt class="font-serif text-[18.5px] font-medium text-gold-bright">{r.title}</dt>
+          <dd class="text-[15.5px] text-ink-dim">{r.body}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import SectionHead from './SectionHead.astro';
+import founderPhoto from '../assets/founder.jpg';
+import { site } from '../config/site';
+---
+
+<section id="about" class="border-b border-line py-16 sm:py-20" aria-labelledby="about-heading">
+  <div class="wrap">
+    <SectionHead id="about-heading" title="About Golden Recruiting">
+      A recruiting and practice consulting firm focused on the financial services industry.
+    </SectionHead>
+
+    <div class="max-w-[68ch] space-y-4 text-base text-ink-dim">
+      <p>Golden Recruiting is a recruiting and practice consulting firm focused on the financial services industry. We provide strategic guidance to advisors and institutions alike, helping both sides navigate change with confidence.</p>
+      <p>We work with clients across transitions, growth, and recruiting initiatives — connecting the right people to the right opportunities, backed by real market intelligence across the industry.</p>
+      <p>We connect advisors and institutions with the opportunities and insight they need to move forward.</p>
+    </div>
+
+    <div class="mt-12 grid items-start gap-8 sm:grid-cols-[220px_1fr] sm:gap-10">
+      <Image
+        src={founderPhoto}
+        alt={`${site.founder.name}, ${site.founder.title}, headshot`}
+        width={220}
+        height={220}
+        widths={[160, 220, 320, 400]}
+        sizes="(max-width: 640px) 160px, 220px"
+        format="webp"
+        quality={82}
+        loading="lazy"
+        decoding="async"
+        class="h-40 w-40 rounded-[4px] border border-line object-cover sm:h-[220px] sm:w-[220px]"
+      />
+      <div>
+        <p class="mb-1 font-serif text-[22px] font-medium">{site.founder.name}</p>
+        <p class="mb-4 text-sm text-gold">{site.founder.title}</p>
+        <p class="max-w-[60ch] text-base text-ink-dim">
+          With over a decade in talent acquisition, {site.founder.shortName} has built her career helping financial services companies find and secure top talent.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

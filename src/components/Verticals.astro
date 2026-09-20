@@ -1,0 +1,53 @@
+---
+import SectionHead from './SectionHead.astro';
+
+const secondary = [
+  {
+    n: '02',
+    title: 'Sales & Business Development',
+    body: 'Account executives and BDRs across B2B and SaaS organizations — evaluated on pipeline discipline, not just past titles.',
+  },
+  {
+    n: '03',
+    title: 'Executive Search',
+    body: 'Senior and C-suite hires where the brief is as much about fit and trajectory as it is about a list of qualifications.',
+  },
+];
+---
+
+<section id="verticals" class="border-b border-line py-16 sm:py-20" aria-labelledby="verticals-heading">
+  <div class="wrap">
+    <SectionHead id="verticals-heading" title="Verticals">
+      Advisor recruiting is our core specialty, with sales and business development, and executive searches run alongside it — we know what a strong candidate actually looks like in each, not just what their resume says.
+    </SectionHead>
+
+    <div class="grid gap-px border border-line bg-line">
+      <article class="bg-bg px-6 py-8 sm:px-[30px]">
+        <h3 class="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 font-serif text-[21px] font-medium">
+          Financial Services &amp; Advisor Recruiting{' '}
+          <span class="font-sans text-sm text-gold">Primary focus</span>
+        </h3>
+        <div class="mt-1.5 grid gap-6 sm:grid-cols-2">
+          <div>
+            <p class="mb-1 text-sm font-semibold text-gold-bright">Experienced Advisors</p>
+            <p class="text-[15px] text-ink-dim">Advisors with portable, revenue-producing books, for banks and wealth-management platforms growing advisor headcount.</p>
+          </div>
+          <div>
+            <p class="mb-1 text-sm font-semibold text-gold-bright">Advisor Support &amp; Growth Roles</p>
+            <p class="text-[15px] text-ink-dim">Associate advisors, client service, administrative, and business development talent supporting advisor teams and practice growth.</p>
+          </div>
+        </div>
+      </article>
+
+      {secondary.map((v) => (
+        <article class="bg-bg px-6 py-8 sm:px-[30px]">
+          <h3 class="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 font-serif text-[21px] font-medium">
+            {v.title}{' '}
+            <span class="font-sans text-sm text-gold">{v.n}</span>
+          </h3>
+          <p class="text-[15px] text-ink-dim">{v.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
