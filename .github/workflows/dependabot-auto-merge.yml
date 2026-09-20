@@ -1,0 +1,52 @@
+name: Dependabot auto-merge
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    # Only Dependabot's own PRs, only in this repo (not forks).
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'britoal94/golden_recruiting'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Majors need a human: leave a note and stop.
+      - name: Flag major update for review
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: gh pr comment "$PR_URL" --body "Major version bump — not auto-merged. Please review the changelog and merge manually."
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Verify the bump on the PR's own tree before merging. This is what
+      # gates the merge, so it works without branch-protection rules.
+      - uses: actions/checkout@v7
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+      - uses: actions/setup-node@v7
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install, check and build
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: |
+          npm ci
+          npm run check
+          npm run build
+        env:
+          SITE_URL: https://goldenrecruiting.com
+
+      - name: Merge minor/patch update
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: gh pr merge --squash --delete-branch "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

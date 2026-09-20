@@ -1,0 +1,44 @@
+# Dependabot keeps npm packages and GitHub Actions current.
+# Minor/patch bumps are grouped into one weekly PR and auto-merged by
+# .github/workflows/dependabot-auto-merge.yml once check + build pass.
+# Major bumps get their own PR and wait for a human.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: America/New_York
+    open-pull-requests-limit: 10
+    # Let a release settle before adopting it (also skips yanked/broken publishes).
+    cooldown:
+      default-days: 5
+      semver-major-days: 14
+    groups:
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+      astro-major:
+        patterns: ["astro", "@astrojs/*"]
+        update-types: ["major"]
+      tailwind-major:
+        patterns: ["tailwindcss", "@tailwindcss/*"]
+        update-types: ["major"]
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: America/New_York
+    groups:
+      actions:
+        patterns: ["*"]
+    labels: ["dependencies", "ci"]
+    commit-message:
+      prefix: "chore(ci)"

@@ -31,11 +31,30 @@ Copy, phone/email, socials and founder details live in `src/config/site.ts`.
 - `src/pages/robots.txt.ts` — generated robots.txt pointing at the sitemap.
 - `scripts/gen-assets.mjs` — regenerates `public/og.png`, `logo.png` and favicons from the seal mark.
 
+## Node & Temporal
+
+The footer year is computed at build time with the native `Temporal` API
+(`Temporal.Now.plainDateISO('America/New_York')`). Temporal is unflagged in
+Node 26 (see `.nvmrc`) and behind `--harmony-temporal` in Node 24, which is
+what Vercel builds with — so every npm script runs the Astro CLI through
+`node --harmony-temporal`. No polyfill is shipped.
+
+## Maintenance automation
+
+- `.github/dependabot.yml` — weekly (Mon 07:00 ET) npm + GitHub Actions updates.
+  Minor/patch bumps are grouped into a single PR after a 5-day cooldown;
+  majors get separate PRs after 14 days.
+- `.github/workflows/dependabot-auto-merge.yml` — runs `astro check` + build on
+  each Dependabot PR and squash-merges minor/patch bumps when green. Majors get
+  a comment and wait for a human.
+- `.github/workflows/ci.yml` — check + build on every push and PR.
+
 ## Scripts
 
 ```sh
 npm run dev       # dev server
 npm run build     # production build (dist/)
 npm run preview   # serve the build locally
+npm run check     # astro type/diagnostic check
 npm run assets    # regenerate OG image / icons
 ```

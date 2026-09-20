@@ -15,3 +15,16 @@ interface Window {
   posthog?: { capture?: (event: string, props?: Record<string, unknown>) => void };
   gtag?: (...args: unknown[]) => void;
 }
+
+// Minimal Temporal surface used by the site. Native in V8; not yet in TS lib.
+declare namespace Temporal {
+  interface PlainDate {
+    readonly year: number;
+    readonly month: number;
+    readonly day: number;
+    toString(): string;
+  }
+  const Now: {
+    plainDateISO(timeZone?: string): PlainDate;
+  };
+}

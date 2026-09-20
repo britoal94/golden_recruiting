@@ -1,9 +1,15 @@
 ---
 import { site } from '../config/site';
-const year = new Date().getFullYear();
+
+// Temporal is native in V8 (Node 26+ unflagged; Node 24 via --harmony-temporal,
+// which the npm scripts pass to the astro CLI). Computed at build time in the
+// firm's local zone so a Jan 1 deploy rolls the year correctly.
+const today = Temporal.Now.plainDateISO('America/New_York');
 ---
 
 <footer class="wrap flex flex-wrap items-center justify-between gap-3 pt-9 pb-12 text-[13.5px] text-ink-dim">
   <span class="font-serif text-[15px] text-ink">{site.name}</span>
-  <span>© {year} {site.legalName} · {site.location.city}, {site.location.region}</span>
+  <span>
+    © <time datetime={today.toString()}>{today.year}</time> {site.legalName} · {site.location.city}, {site.location.region}
+  </span>
 </footer>

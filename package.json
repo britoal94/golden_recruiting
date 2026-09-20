@@ -3,13 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
+    "dev": "node --harmony-temporal ./node_modules/astro/bin/astro.mjs dev",
+    "build": "node --harmony-temporal ./node_modules/astro/bin/astro.mjs build",
+    "preview": "node --harmony-temporal ./node_modules/astro/bin/astro.mjs preview",
+    "check": "node --harmony-temporal ./node_modules/astro/bin/astro.mjs check",
+    "astro": "node --harmony-temporal ./node_modules/astro/bin/astro.mjs",
     "assets": "node scripts/gen-assets.mjs"
   },
   "dependencies": {
