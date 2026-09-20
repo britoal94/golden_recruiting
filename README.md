@@ -33,6 +33,7 @@ Copy, phone/email, socials and founder details live in `src/config/site.ts`.
 - `src/layouts/Base.astro` — HTML shell, fonts, `<SEO>` and `<Analytics>`.
 - `src/components/SEO.astro` — title/description, canonical, Open Graph, Twitter, JSON-LD (Organization, WebSite).
 - `src/pages/api/contact.ts` — server-rendered Resend endpoint with honeypot + validation.
+- `src/emails/ContactSubmission.tsx` — React Email template for the notification (`npm run email` previews it at :3001).
 - `src/pages/robots.txt.ts` — generated robots.txt pointing at the sitemap.
 - `scripts/gen-assets.mjs` — regenerates `public/og.png`, `logo.png` and favicons from the seal mark.
 
@@ -64,4 +65,5 @@ npm run build     # production build (dist/)
 npm run preview   # serve the build locally
 npm run check     # astro type/diagnostic check
 npm run assets    # regenerate OG image / icons
+npm run email     # React Email preview server for src/emails
 ```

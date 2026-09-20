@@ -1,16 +1,14 @@
 import type { APIRoute } from 'astro';
 import { createHash } from 'node:crypto';
+import { createElement } from 'react';
 import { Resend } from 'resend';
+import { ContactSubmission } from '../../emails/ContactSubmission';
 import { site } from '../../config/site';
 
 export const prerender = false;
 
 const ROLES = new Set(['Hiring for a role', 'Looking for a role', 'Something else']);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
-}
 
 function respond(request: Request, status: number, body: { ok: boolean; error?: string }) {
   const wantsJson = request.headers.get('accept')?.includes('application/json');
@@ -62,18 +60,18 @@ export const POST: APIRoute = async ({ request }) => {
   const resend = new Resend(apiKey);
   const subject = `[${site.name}] ${role} — ${name}`;
   const text = `Name: ${name}\nEmail: ${email}\nI am: ${role}\n\n${message}`;
-  const html = `
-    <table style="font-family:sans-serif;font-size:15px;line-height:1.5">
-      <tr><td style="color:#666;padding:4px 12px 4px 0">Name</td><td>${escapeHtml(name)}</td></tr>
-      <tr><td style="color:#666;padding:4px 12px 4px 0">Email</td><td><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
-      <tr><td style="color:#666;padding:4px 12px 4px 0">I am</td><td>${escapeHtml(role)}</td></tr>
-    </table>
-    <p style="font-family:sans-serif;font-size:15px;line-height:1.6;white-space:pre-wrap">${escapeHtml(message)}</p>`;
-
   // Same submission retried (e.g. flaky network) within 24h is delivered once.
   const idempotencyKey = `contact-form/${createHash('sha256').update(`${email}\n${message}`).digest('hex').slice(0, 32)}`;
 
-  const { error } = await resend.emails.send({ from, to, replyTo: email, subject, text, html }, { idempotencyKey });
+  const react = createElement(ContactSubmission, {
+    name,
+    email,
+    role,
+    message,
+    receivedAt: new Date().toISOString(),
+  });
+
+  const { error } = await resend.emails.send({ from, to, replyTo: email, subject, text, react }, { idempotencyKey });
 
   if (error) {
     console.error('Resend error:', error);

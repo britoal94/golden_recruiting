@@ -23,7 +23,7 @@ export const site = {
   contact: {
     // Leave empty until confirmed; the UI hides empty rows.
     phone: '',
-    email: '',
+    email: 'Bri@goldenrecruiting.com',
   } as { phone: string; email: string },
   social: {
     linkedin: '',
