@@ -3,6 +3,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_POSTHOG_HOST?: string;
   readonly PUBLIC_GA_ID?: string;
   readonly RESEND_API_KEY?: string;
+  readonly RESEND_EMAIL_DOMAIN?: string;
   readonly CONTACT_TO_EMAIL?: string;
   readonly CONTACT_FROM_EMAIL?: string;
 }

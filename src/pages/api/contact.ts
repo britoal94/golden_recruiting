@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { createHash } from 'node:crypto';
 import { Resend } from 'resend';
 import { site } from '../../config/site';
 
@@ -44,12 +45,17 @@ export const POST: APIRoute = async ({ request }) => {
     return respond(request, 422, { ok: false, error: 'Please fill in your name, a valid email, and a message.' });
   }
 
+  // RESEND_API_KEY and RESEND_EMAIL_DOMAIN are injected by the Vercel Resend
+  // integration; the sending domain is the verified subdomain, so a default
+  // from-address built from it can never hit a domain-mismatch 403.
   const apiKey = import.meta.env.RESEND_API_KEY;
   const to = import.meta.env.CONTACT_TO_EMAIL;
-  const from = import.meta.env.CONTACT_FROM_EMAIL || `${site.name} <onboarding@resend.dev>`;
+  const sendingDomain = import.meta.env.RESEND_EMAIL_DOMAIN;
+  const from =
+    import.meta.env.CONTACT_FROM_EMAIL || (sendingDomain ? `${site.name} <contact@${sendingDomain}>` : '');
 
-  if (!apiKey || !to) {
-    console.error('Contact form: RESEND_API_KEY or CONTACT_TO_EMAIL is not configured.');
+  if (!apiKey || !to || !from) {
+    console.error('Contact form: RESEND_API_KEY, CONTACT_TO_EMAIL or a from-address is not configured.');
     return respond(request, 503, { ok: false, error: 'The contact form is not configured yet. Please email us directly.' });
   }
 
@@ -64,7 +70,10 @@ export const POST: APIRoute = async ({ request }) => {
     </table>
     <p style="font-family:sans-serif;font-size:15px;line-height:1.6;white-space:pre-wrap">${escapeHtml(message)}</p>`;
 
-  const { error } = await resend.emails.send({ from, to, replyTo: email, subject, text, html });
+  // Same submission retried (e.g. flaky network) within 24h is delivered once.
+  const idempotencyKey = `contact-form/${createHash('sha256').update(`${email}\n${message}`).digest('hex').slice(0, 32)}`;
+
+  const { error } = await resend.emails.send({ from, to, replyTo: email, subject, text, html }, { idempotencyKey });
 
   if (error) {
     console.error('Resend error:', error);
