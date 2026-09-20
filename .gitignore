@@ -29,3 +29,8 @@ pnpm-debug.log*
 .vercel/
 .env.local
 .env*
+
+# agent tooling installed by integrations (local only)
+.agents/
+.claude/skills/
+skills-lock.json
