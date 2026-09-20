@@ -25,7 +25,7 @@ flag and fails with a clear error — use Node 26 for background mode.
 | `PUBLIC_POSTHOG_KEY` / `PUBLIC_POSTHOG_HOST` | PostHog project key + host. Tracker is only injected when the key is set. |
 | `PUBLIC_GA_ID` | Google Analytics 4 measurement ID (`G-XXXX`). Only injected when set. |
 | `RESEND_API_KEY` / `RESEND_EMAIL_DOMAIN` | Injected by the Vercel Resend Marketplace integration. Sending domain: `mail.goldenrecruiting.com`. |
-| `CONTACT_TO_EMAIL` | Inbox that receives contact-form submissions (`Bri@goldenrecruiting.com`). |
+| `CONTACT_TO_EMAIL` | Inbox that receives contact-form submissions (`briana@goldenrecruiting.com`). |
 | `CONTACT_FROM_EMAIL` | Optional sender override. Defaults to `Golden Recruiting <contact@$RESEND_EMAIL_DOMAIN>`. |
 
 Vercel Web Analytics is on via `@vercel/analytics/astro` (no key needed).
