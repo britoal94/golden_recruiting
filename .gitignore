@@ -27,3 +27,4 @@ pnpm-debug.log*
 # local
 .playwright-mcp/
 .vercel/
+.env.local
