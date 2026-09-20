@@ -5,10 +5,15 @@ Marketing site for Golden Recruiting — Astro 7 + Tailwind CSS 4, deployed on V
 ## Develop
 
 ```sh
+nvm use                # Node 26 (.nvmrc) — Temporal is native there
 npm install
 cp .env.example .env   # fill in keys as they arrive
 npm run dev
 ```
+
+On Node 24, `npm run dev` still works in the foreground (the script passes
+`--harmony-temporal`), but `astro dev --background` respawns node without the
+flag and fails with a clear error — use Node 26 for background mode.
 
 ## Configuration
 
