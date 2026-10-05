@@ -19,11 +19,11 @@
     "@astrojs/vercel": "^11.0.11",
     "@tailwindcss/vite": "^4.3.3",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^7.3.4",
+    "astro": "^7.3.5",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-email": "^6.9.5",
-    "resend": "^6.28.1",
+    "react-email": "^6.11.0",
+    "resend": "^6.31.0",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
