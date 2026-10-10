@@ -1,55 +1,24 @@
-// Generates the brand's static image assets into public/ from the hallmark seal.
-// Run: node scripts/gen-assets.mjs
+// Generate website and email assets from the supplied vector identity.
 import sharp from 'sharp';
-import { writeFile, mkdir } from 'node:fs/promises';
-
-const GOLD = '#c79a3d';
-const BG = '#15140f';
-const INK = '#f4efe4';
-const DIM = '#b9b2a1';
-
-const seal = (size, stroke = GOLD, sw = [1.4, 1, 1.6]) => `
-  <g transform="scale(${size / 48})" fill="none" stroke="${stroke}" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="24" cy="24" r="21" stroke-width="${sw[0]}"/>
-    <circle cx="24" cy="24" r="15.5" stroke-width="${sw[1]}"/>
-    <path d="M17 24.5L21.5 29L31.5 18" stroke-width="${sw[2]}"/>
-  </g>`;
-
-const svgDoc = (w, h, body) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${body}</svg>`;
-
-const iconSvg = (size, pad = 0.12) => {
-  const inner = size * (1 - pad * 2);
-  return svgDoc(size, size,
-    `<rect width="${size}" height="${size}" rx="${size * 0.18}" fill="${BG}"/>
-     <g transform="translate(${size * pad} ${size * pad})">${seal(inner, GOLD, [2, 1.4, 2.4])}</g>`);
+import { readFile, writeFile } from 'node:fs/promises';
+const BLUE = '#073F8B';
+const logo = await readFile('public/brand/logo.svg');
+const mark = await readFile('public/brand/Favicon_Favicon_1024_X_1024.svg');
+const icon = async (size) => {
+  const foreground = await sharp(mark).trim().resize(Math.round(size * .72), Math.round(size * .72), { fit: 'inside' }).png().toBuffer();
+  return sharp({ create: { width: size, height: size, channels: 4, background: BLUE } }).composite([{ input: foreground, gravity: 'centre' }]).png().toBuffer();
 };
-
-// Open Graph card 1200x630
-const og = svgDoc(1200, 630, `
-  <rect width="1200" height="630" fill="${BG}"/>
-  <rect x="0" y="0" width="1200" height="6" fill="${GOLD}"/>
-  <g transform="translate(88 96)">${seal(88, GOLD, [1.2, 0.8, 1.4])}</g>
-  <text x="88" y="270" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="${INK}">Strategic recruiting for the</text>
-  <text x="88" y="345" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="${INK}">financial services industry.</text>
-  <text x="88" y="430" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="${DIM}">Experienced advisors · Advisor support · Sales · Executive search</text>
-  <text x="88" y="540" font-family="Georgia, serif" font-size="34" fill="${GOLD}">Golden Recruiting</text>
-  <text x="1112" y="540" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="${DIM}">Charlotte, NC</text>
-`);
-
-await mkdir('public', { recursive: true });
-await sharp(Buffer.from(og)).png().toFile('public/og.png');
-await sharp(Buffer.from(iconSvg(512))).png().toFile('public/logo.png');
-await sharp(Buffer.from(iconSvg(512))).png().toFile('public/icon-512.png');
-await sharp(Buffer.from(iconSvg(192))).png().toFile('public/icon-192.png');
-await sharp(Buffer.from(iconSvg(180))).png().toFile('public/apple-touch-icon.png');
-await sharp(Buffer.from(iconSvg(32, 0.08))).png().toFile('public/favicon-32.png');
-// .ico: a 32px PNG stored in an ICO container
-const png32 = await sharp(Buffer.from(iconSvg(32, 0.08))).png().toBuffer();
-const ico = Buffer.alloc(6 + 16);
-ico.writeUInt16LE(0, 0); ico.writeUInt16LE(1, 2); ico.writeUInt16LE(1, 4);
-ico.writeUInt8(32, 6); ico.writeUInt8(32, 7); ico.writeUInt8(0, 8); ico.writeUInt8(0, 9);
-ico.writeUInt16LE(1, 10); ico.writeUInt16LE(32, 12); ico.writeUInt32LE(png32.length, 14); ico.writeUInt32LE(22, 18);
-await writeFile('public/favicon.ico', Buffer.concat([ico, png32]));
-await writeFile('public/favicon.svg', iconSvg(48, 0.08));
-console.log('assets written');
+for (const [file, size] of [['icon-512.png',512],['icon-192.png',192],['apple-touch-icon.png',180],['favicon-32.png',32]]) await writeFile(`public/${file}`,await icon(size));
+await sharp(logo).resize(1020).png().toFile('public/logo.png');
+// Visible on both light and dark browser tab bars.
+const favicon = (await readFile('public/brand/Favicon_Favicon_32_X_32.svg','utf8')).replace(/(<svg[^>]*>)/, '$1<rect width="32" height="32" rx="4" fill="#073F8B"/>');
+await writeFile('public/favicon.svg',favicon);
+const png32 = await icon(32);
+const ico = Buffer.alloc(22);
+ico.writeUInt16LE(1,2); ico.writeUInt16LE(1,4); ico.writeUInt8(32,6); ico.writeUInt8(32,7);
+ico.writeUInt16LE(1,10); ico.writeUInt16LE(32,12); ico.writeUInt32LE(png32.length,14); ico.writeUInt32LE(22,18);
+await writeFile('public/favicon.ico',Buffer.concat([ico,png32]));
+const wordmark = await sharp(logo).resize(800).png().toBuffer();
+const text = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="330" width="1040" height="3" fill="#3FA8E0"/><text x="80" y="418" fill="white" font-size="36" font-family="Arial, sans-serif">Building connections that lead to better hires.</text><text x="80" y="500" fill="white" font-size="24" font-family="Arial, sans-serif">Financial services recruiting · Charlotte, NC</text></svg>`);
+await sharp({create:{width:1200,height:630,channels:4,background:BLUE}}).composite([{input:wordmark,left:70,top:80},{input:text}]).png().toFile('public/og.png');
+console.log('Brand assets generated');

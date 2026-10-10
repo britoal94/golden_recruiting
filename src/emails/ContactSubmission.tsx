@@ -27,10 +27,9 @@ export interface ContactSubmissionProps {
   receivedAt: string;
 }
 
-// Brand tokens (mirrors src/styles/global.css). Gold is the darker light-mode
-// shade so it clears WCAG AA on white; the header uses the bright shade on ink.
+// Brand palette with email-safe typography fallbacks.
 const SITE_URL = 'https://goldenrecruiting.com';
-const LOGO_URL = `${SITE_URL}/logo.png`;
+const LOGO_URL = `${SITE_URL}/icon-192.png`;
 
 export function ContactSubmission({ name, email, role, message, receivedAt }: ContactSubmissionProps) {
   const received = new Date(receivedAt).toLocaleString('en-US', {
@@ -48,16 +47,16 @@ export function ContactSubmission({ name, email, role, message, receivedAt }: Co
           theme: {
             extend: {
               colors: {
-                ink: '#15140f',
-                'ink-dim': '#5c5646',
-                paper: '#faf7f0',
-                raised: '#f1ebdd',
-                line: '#ddd4bd',
-                gold: '#a97b1f',
-                'gold-bright': '#e0b862',
+                ink: '#073F8B',
+                'ink-dim': '#5B6775',
+                paper: '#FFFFFF',
+                raised: '#F2F7FC',
+                line: '#D8E4F0',
+                brand: '#0879C3',
+                'brand-hover': '#FFFFFF',
               },
               fontFamily: {
-                serif: ['Georgia', '"Times New Roman"', 'serif'],
+                serif: ['Poppins', 'Arial', 'sans-serif'],
                 sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
               },
             },
@@ -72,11 +71,11 @@ export function ContactSubmission({ name, email, role, message, receivedAt }: Co
             <Section className="bg-ink px-8 py-6">
               <Row>
                 <Column className="w-[48px] align-middle">
-                  <Img src={LOGO_URL} alt="Golden Recruiting seal" width="40" height="40" className="rounded-[8px]" />
+                  <Img src={LOGO_URL} alt="Golden Recruiting GR icon" width="40" height="40" className="rounded-[8px]" />
                 </Column>
                 <Column className="align-middle pl-3">
-                  <Text className="m-0 font-serif text-[20px] text-[#f4efe4]">Golden Recruiting</Text>
-                  <Text className="m-0 text-[12px] text-gold-bright tracking-[0.5px]">Contact form · goldenrecruiting.com</Text>
+                  <Text className="m-0 font-serif text-[20px] text-[#FFFFFF]">Golden Recruiting</Text>
+                  <Text className="m-0 text-[12px] text-brand-hover tracking-[0.5px]">Contact form · goldenrecruiting.com</Text>
                 </Column>
               </Row>
             </Section>
@@ -98,7 +97,7 @@ export function ContactSubmission({ name, email, role, message, receivedAt }: Co
                 <Row className="border-0 border-b border-solid border-line">
                   <Column className="w-[110px] py-3 text-[13px] text-ink-dim">Email</Column>
                   <Column className="py-3 text-[15px]">
-                    <Link href={`mailto:${email}`} className="text-gold underline">
+                    <Link href={`mailto:${email}`} className="text-brand underline">
                       {email}
                     </Link>
                   </Column>
@@ -121,7 +120,7 @@ export function ContactSubmission({ name, email, role, message, receivedAt }: Co
 
               <Button
                 href={`mailto:${email}?subject=${replySubject}`}
-                className="box-border bg-gold text-white text-[14px] font-medium px-5 py-3 rounded-[3px] no-underline"
+                className="box-border bg-brand text-white text-[14px] font-medium px-5 py-3 rounded-[3px] no-underline"
               >
                 Reply to {name.split(' ')[0]}
               </Button>

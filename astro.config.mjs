@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
@@ -29,24 +29,4 @@ export default defineConfig({
   },
   integrations: [sitemap()],
   adapter: vercel(),
-  fonts: [
-    {
-      provider: fontProviders.google(),
-      name: 'Newsreader',
-      cssVariable: '--font-newsreader',
-      weights: [400, 500, 600],
-      styles: ['normal', 'italic'],
-      subsets: ['latin'],
-      fallbacks: ['Georgia', 'serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'IBM Plex Sans',
-      cssVariable: '--font-plex',
-      weights: [400, 500, 600],
-      styles: ['normal'],
-      subsets: ['latin'],
-      fallbacks: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-    },
-  ],
 });

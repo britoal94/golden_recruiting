@@ -8,7 +8,7 @@ const today = Temporal.Now.plainDateISO('America/New_York');
 ---
 
 <footer class="wrap flex flex-wrap items-center justify-between gap-3 pt-9 pb-12 text-[13.5px] text-ink-dim">
-  <span class="font-serif text-[15px] text-ink">{site.name}</span>
+  <a href="#top" aria-label={`${site.name} — back to top`} class="inline-block rounded bg-ink p-3"><img src="/brand/logo.svg" alt={site.name} width="200" height="57" class="h-auto w-[200px]" /></a>
   <span>
     © <time datetime={today.toString()}>{today.year}</time> {site.legalName} · {site.location.city}, {site.location.region}
   </span>
