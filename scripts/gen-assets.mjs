@@ -19,6 +19,6 @@ ico.writeUInt16LE(1,2); ico.writeUInt16LE(1,4); ico.writeUInt8(32,6); ico.writeU
 ico.writeUInt16LE(1,10); ico.writeUInt16LE(32,12); ico.writeUInt32LE(png32.length,14); ico.writeUInt32LE(22,18);
 await writeFile('public/favicon.ico',Buffer.concat([ico,png32]));
 const wordmark = await sharp(logo).resize(800).png().toBuffer();
-const text = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="330" width="1040" height="3" fill="#3FA8E0"/><text x="80" y="418" fill="white" font-size="36" font-family="Arial, sans-serif">Building connections that lead to better hires.</text><text x="80" y="500" fill="white" font-size="24" font-family="Arial, sans-serif">Financial services recruiting · Charlotte, NC</text></svg>`);
+const text = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="330" width="1040" height="3" fill="#3FA8E0"/><text x="80" y="418" fill="white" font-size="36" font-family="Arial, sans-serif">Great hires start with great connections.</text><text x="80" y="500" fill="white" font-size="24" font-family="Arial, sans-serif">Relationship-first recruiting</text></svg>`);
 await sharp({create:{width:1200,height:630,channels:4,background:BLUE}}).composite([{input:wordmark,left:70,top:80},{input:text}]).png().toFile('public/og.png');
 console.log('Brand assets generated');

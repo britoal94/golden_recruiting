@@ -104,3 +104,7 @@ Resend: https://resend.com/docs · React Email: https://react.email/docs
 ## Brand refresh
 
 Approved uploaded SVGs live in `public/brand/`; `logo.svg` adjusts only the artboard to preserve logo clear space. The two supplied logo files contain the same white artwork. Website fonts are self-hosted via Fontsource (Poppins 500 headings, DM Sans 300 body). Stock scenes in `src/assets/brand/` are illustrative, not portraits of staff or clients. Keep the actual founder headshot. `npm run assets` regenerates icons and social imagery from these SVGs.
+
+## Reference-content update
+
+The active homepage in `src/pages/index.astro` now matches the written content on golden-recruiting-1010.vercel.app: relationship-first positioning, family-owned introduction, values, three-stage process, employer/candidate sections, mission and vision. Navigation follows these sections. Contact uses hello@goldenrecruiting.com mailto links as on the reference; existing contact API and earlier section components remain in the repository but are not rendered on the homepage. No email-provider or environment changes were made.

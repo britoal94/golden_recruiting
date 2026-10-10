@@ -1,53 +1,96 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Verticals from '../components/Verticals.astro';
-import Services from '../components/Services.astro';
-import Process from '../components/Process.astro';
-import Why from '../components/Why.astro';
-import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import BrandPhoto from '../components/BrandPhoto.astro';
+import conversation from '../assets/brand/advisor-conversation.webp';
+import connection from '../assets/brand/connection.webp';
+import partnership from '../assets/brand/partnership.webp';
+import team from '../assets/brand/team-discussion.webp';
+import handshake from '../assets/brand/handshake.webp';
+import candidate from '../assets/brand/candidate-conversation.webp';
 import { site } from '../config/site';
-
-const siteUrl = Astro.site!.toString();
-
-// Page-specific structured data: the services offered, as an ItemList of Service nodes.
-const servicesLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Recruiting services',
-  itemListElement: [
-    ['Recruitment Process Outsourcing (RPO)', 'Embedded talent acquisition for ongoing or high-volume hiring.'],
-    ['Container Search', 'Hybrid engagement: an upfront fee credited against the placement fee.'],
-    ['Contingent Search', 'Fee due only once a candidate is placed.'],
-  ].map(([name, description], i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    item: {
-      '@type': 'Service',
-      name,
-      description,
-      serviceType: 'Recruiting',
-      provider: { '@id': `${siteUrl}#organization` },
-      areaServed: { '@type': 'Country', name: 'United States' },
-    },
-  })),
-};
+const values = [
+  { title: 'Human', subtitle: 'Relationships first.', body: 'Personal, approachable, and centered on people. We lead with genuine conversations and individual attention at the heart of every search.' },
+  { title: 'Intelligent', subtitle: 'Clarity through connection.', body: 'Experience and insight turn talent needs into better matches. We understand the roles, the people, and what makes the right fit work.' },
+  { title: 'Trustworthy', subtitle: 'Built around you.', body: 'Accountability, honest communication, and lasting relationships come first — guiding every search and every placement we make.' },
+];
+const steps = [
+  { title: 'Connect', body: 'We start with a real conversation — understanding your goals, your culture, and the people already on your team.' },
+  { title: 'Understand', body: 'Experience and insight turn a brief into a clear picture of the right fit, so every candidate we present is intentional.' },
+  { title: 'Partner in progress', body: 'We stay accountable with honest communication and consistent follow-through, well beyond a single placement.' },
+];
 ---
-
-<Base title={`${site.name} — Financial Advisor & Financial Services Recruiting, Charlotte NC`} jsonLd={[servicesLd]}>
+<Base title={`${site.name} — Great hires start with great connections`}>
   <Nav />
   <main id="main">
     <div id="top"></div>
-    <Hero />
-    <About />
-    <Verticals />
-    <Services />
-    <Process />
-    <Why />
-    <Contact />
+    <section class="border-b border-line py-16 sm:py-20" aria-labelledby="hero-heading">
+      <div class="wrap">
+        <h1 id="hero-heading" class="max-w-[20ch] text-[clamp(38px,5.4vw,64px)] leading-[1.12]">Great hires start with great connections.</h1>
+        <p class="mt-6 max-w-[65ch] text-lg text-ink-dim">Golden Recruiting connects employers and talent through real conversations, trusted relationships, and a genuinely personal approach to finding the right fit.</p>
+        <BrandPhoto src={conversation} alt="Two professionals in a one-to-one conversation in a bright office" />
+        <p class="mt-6 font-medium text-brand">The Golden Way</p>
+        <p class="text-ink-dim">A face-to-face approach built on trust and accountability.</p>
+      </div>
+    </section>
+    <section id="about" class="border-b border-line py-16 sm:py-20" aria-labelledby="about-heading">
+      <div class="wrap">
+        <h2 id="about-heading" class="text-3xl leading-snug">Recruitment made personal, one meaningful connection at a time.</h2>
+        <div class="mt-6 max-w-[70ch] space-y-4 text-ink-dim">
+          <p>Golden Recruiting puts people first, creating meaningful connections between employers and candidates through personal conversations and a genuine understanding of what each side is really looking for.</p>
+          <p>As a family-owned firm, every search receives personal attention and care — the kind of relationship-driven recruiting that leads to hires that last.</p>
+        </div>
+        <dl class="mt-8 grid gap-6 sm:grid-cols-3">
+          <div><dt class="text-2xl font-medium">1:1</dt><dd class="text-ink-dim">Personal attention on every search</dd></div>
+          <div><dt class="text-2xl font-medium">Family</dt><dd class="text-ink-dim">Owned and operated with care</dd></div>
+          <div><dt class="text-2xl font-medium">Lasting</dt><dd class="text-ink-dim">Partnerships beyond a single hire</dd></div>
+        </dl>
+        <BrandPhoto src={connection} alt="Professionals sharing a conversation around a table" />
+      </div>
+    </section>
+    <section id="values" class="border-b border-line py-16 sm:py-20" aria-labelledby="values-heading">
+      <div class="wrap">
+        <h2 id="values-heading" class="text-3xl leading-snug">Principles that make every search more personal.</h2>
+        <p class="mt-4 text-ink-dim">Better hires start with better connections. These are the values that shape how we work with clients and candidates alike.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          {values.map(value => <article class="rounded-lg border border-line bg-bg-raised p-6"><h3 class="text-xl">{value.title}</h3><p class="mt-3 font-medium text-brand">{value.subtitle}</p><p class="mt-3 text-ink-dim">{value.body}</p></article>)}
+        </div>
+        <BrandPhoto src={partnership} alt="Two professionals walking together through a sunlit hallway" />
+      </div>
+    </section>
+    <section id="process" class="border-b border-line py-16 sm:py-20" aria-labelledby="process-heading">
+      <div class="wrap">
+        <h2 id="process-heading" class="text-3xl leading-snug">A relationship-driven process, from first hello to lasting hire.</h2>
+        <p class="mt-4 text-ink-dim">Recruiting without complexity — a clear, human framework built on trust, accountability, and partnerships that continue beyond a single search.</p>
+        <ol class="mt-8 grid gap-6 md:grid-cols-3">
+          {steps.map((step, i) => <li class="border-t border-line pt-6"><span class="text-brand" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><h3 class="mt-3 text-xl">{step.title}</h3><p class="mt-3 text-ink-dim">{step.body}</p></li>)}
+        </ol>
+        <BrandPhoto src={team} alt="Three professionals discussing documents around an office table" />
+      </div>
+    </section>
+    <section id="connections" class="border-b border-line py-16 sm:py-20" aria-labelledby="connections-heading">
+      <div class="wrap">
+        <h2 id="connections-heading" class="text-3xl leading-snug">Two sides of every great hire, connected with care.</h2>
+        <div class="mt-8 grid gap-8 md:grid-cols-2">
+          <article><h3 class="text-xl">Find people who fit — not just résumés that match.</h3><ul class="mt-4 list-disc space-y-2 pl-5 text-ink-dim"><li>A partner who learns your culture and goals</li><li>Intentional, vetted candidate shortlists</li><li>Honest communication at every stage</li></ul><BrandPhoto src={handshake} alt="Two professionals shaking hands in a sunlit office" /></article>
+          <article><h3 class="text-xl">Be seen as a person, guided toward the right opportunity.</h3><ul class="mt-4 list-disc space-y-2 pl-5 text-ink-dim"><li>Real conversations about what you want next</li><li>Advocacy from people who know the roles</li><li>Support through every step of the process</li></ul><BrandPhoto src={candidate} alt="A one-to-one professional conversation in a bright meeting area" /></article>
+        </div>
+        <dl class="mt-12 grid gap-8 rounded-lg bg-bg-raised p-6 md:grid-cols-2">
+          <div><dt class="font-medium text-brand">Our mission</dt><dd class="mt-3 text-ink-dim">To connect people and opportunities through relationships built on trust, honesty, and genuine understanding.</dd></div>
+          <div><dt class="font-medium text-brand">Our vision</dt><dd class="mt-3 text-ink-dim">To be the recruiting partner people return to — because the relationship always mattered more than the transaction.</dd></div>
+        </dl>
+      </div>
+    </section>
+    <section id="contact" class="py-16 sm:py-20" aria-labelledby="contact-heading">
+      <div class="wrap">
+        <h2 id="contact-heading" class="text-3xl leading-snug">Clearing the way for better connections.</h2>
+        <p class="mt-4 max-w-[65ch] text-ink-dim">Whether you're building a team or looking for your next role, it starts with a conversation. We'd love to hear from you.</p>
+        <a class="btn mt-6" href={`mailto:${site.contact.email}`}>Start a Conversation</a>
+        <a class="mt-4 block text-brand underline" href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+      </div>
+    </section>
   </main>
+  <div class="wrap border-t border-line pt-8"><p class="max-w-[65ch] text-ink-dim">Relationship-first recruiting built around real conversations, trusted partnerships, and the people behind every opportunity.</p><p class="mt-4 font-medium">Get in touch</p><a class="text-brand underline" href={`mailto:${site.contact.email}`}>{site.contact.email}</a></div>
   <Footer />
 </Base>
