@@ -1,40 +1,19 @@
 @import "tailwindcss";
 
-/* Brand tokens. Dark is the default; light follows the OS preference
-   unless <html data-theme="dark"> forces it. */
+/* Approved brand palette. A consistent light canvas keeps photographs and
+   Royal Blue identity clear regardless of the visitor's OS theme. */
 :root {
-  --ink: #f4efe4;
-  --ink-dim: #b9b2a1;
-  --bg: #15140f;
-  --bg-raised: #1c1a13;
-  --gold: #c79a3d;
-  --gold-bright: #e0b862;
-  --line: #38352a;
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --ink: #1c1a13;
-    --ink-dim: #5c5646;
-    --bg: #faf7f0;
-    --bg-raised: #f1ebdd;
-    --gold: #a97b1f;
-    --gold-bright: #8a6416;
-    --line: #ddd4bd;
-    color-scheme: light;
-  }
-}
-
-:root[data-theme="dark"] {
-  --ink: #f4efe4;
-  --ink-dim: #b9b2a1;
-  --bg: #15140f;
-  --bg-raised: #1c1a13;
-  --gold: #c79a3d;
-  --gold-bright: #e0b862;
-  --line: #38352a;
-  color-scheme: dark;
+  --ink: #073F8B;
+  --ink-dim: #5B6775;
+  --bg: #FFFFFF;
+  --bg-raised: #F2F7FC;
+  --brand: #0879C3;
+  --brand-hover: #073F8B;
+  --line: #D8E4F0;
+  --sky: #3FA8E0;
+  --font-poppins: "Poppins";
+  --font-dm-sans: "DM Sans";
+  color-scheme: light;
 }
 
 @theme inline {
@@ -42,12 +21,12 @@
   --color-ink-dim: var(--ink-dim);
   --color-bg: var(--bg);
   --color-bg-raised: var(--bg-raised);
-  --color-gold: var(--gold);
-  --color-gold-bright: var(--gold-bright);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
   --color-line: var(--line);
 
-  --font-serif: var(--font-newsreader);
-  --font-sans: var(--font-plex);
+  --font-serif: var(--font-poppins);
+  --font-sans: var(--font-dm-sans);
 }
 
 @layer base {
@@ -62,7 +41,7 @@
     @apply bg-bg text-ink font-sans antialiased leading-relaxed;
   }
   :focus-visible {
-    outline: 2px solid var(--gold-bright);
+    outline: 2px solid var(--brand-hover);
     outline-offset: 3px;
   }
 }
@@ -72,9 +51,14 @@
 }
 
 @utility btn {
-  @apply inline-flex items-center justify-center rounded-[3px] border border-gold bg-gold px-[22px] py-[11px] font-sans text-[14.5px] font-medium text-bg no-underline transition-colors duration-150 hover:bg-gold-bright hover:border-gold-bright;
+  @apply inline-flex items-center justify-center rounded-[3px] border border-brand bg-brand px-[22px] py-[11px] font-sans text-[14.5px] font-medium text-white no-underline transition-colors duration-150 hover:bg-brand-hover hover:border-brand-hover;
 }
 
 @utility btn-ghost {
-  @apply border-line bg-transparent text-ink hover:border-gold hover:bg-transparent hover:text-gold-bright;
+  @apply border-line bg-transparent text-ink hover:border-brand hover:bg-transparent hover:text-brand-hover;
+}
+
+@layer base {
+  body { font-weight: 300; }
+  h1, h2, h3 { font-family: var(--font-poppins), sans-serif; font-weight: 500; }
 }

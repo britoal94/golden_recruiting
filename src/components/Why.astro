@@ -1,5 +1,7 @@
 ---
 import SectionHead from './SectionHead.astro';
+import BrandPhoto from './BrandPhoto.astro';
+import brandPhoto from '../assets/brand/handshake.webp';
 
 const reasons = [
   { title: 'Deep in advisor recruiting', body: 'We know the business of advisor recruiting well enough to tell a real fit from a resume that just checks boxes.' },
@@ -17,10 +19,11 @@ const reasons = [
     <dl>
       {reasons.map((r) => (
         <div class="grid gap-1.5 border-t border-line py-5 first:border-t-0 sm:grid-cols-[220px_1fr] sm:gap-7">
-          <dt class="font-serif text-[18.5px] font-medium text-gold-bright">{r.title}</dt>
+          <dt class="font-serif text-[18.5px] font-medium text-brand-hover">{r.title}</dt>
           <dd class="text-[15.5px] text-ink-dim">{r.body}</dd>
         </div>
       ))}
     </dl>
+    <BrandPhoto src={brandPhoto} alt="Two professionals shaking hands in a sunlit office" />
   </div>
 </section>

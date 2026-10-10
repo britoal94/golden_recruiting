@@ -39,14 +39,14 @@ missing. Do not add a Temporal polyfill.
 | `src/components/*.astro` | One component per section: Nav, Hero, About, Verticals, Services, Process, Why, Contact, Footer. |
 | `src/pages/api/contact.ts` | Server route (`prerender = false`). Validates, honeypot, sends via Resend with an idempotency key. |
 | `src/emails/ContactSubmission.tsx` | React Email template for the form notification. `npm run email` previews it. |
-| `src/styles/global.css` | Tailwind v4 `@theme inline` brand tokens; dark default, light via `prefers-color-scheme`. |
+| `src/styles/global.css` | Tailwind v4 `@theme inline` brand tokens; Royal/Azure Blue on a consistent white canvas. |
 | `public/` | Generated assets (`og.png`, `logo.png`, favicons) — regenerate with `npm run assets`, don't hand-edit. |
 | `vercel.json` | Immutable caching for `/_astro/*` and security headers (the adapter's own cache rule is ordered after `handle: filesystem`, so it never fires). |
 
 ## Conventions
 
 - Tailwind utility classes in markup; brand colors only via the tokens in
-  `global.css` (`bg-bg`, `text-ink`, `text-gold`, …). No hex in components.
+  `global.css` (`bg-bg`, `text-ink`, `text-brand`, …). No hex in components.
 - Copy edits go in the component; identity/contact edits go in `site.ts`.
 - Images: `<Image>` from `astro:assets` with explicit `width`/`height`,
   `widths`/`sizes`, descriptive `alt`. Never `<img>` for content images.
@@ -100,3 +100,11 @@ context7, or the vendor's `llms.txt`), not memory — this repo has already been
 bitten by stale assumptions (Vercel Node versions, PostHog snippet, TS 7).
 Astro: https://docs.astro.build · Tailwind: https://tailwindcss.com/docs ·
 Resend: https://resend.com/docs · React Email: https://react.email/docs
+
+## Brand refresh
+
+Approved uploaded SVGs live in `public/brand/`; `logo.svg` adjusts only the artboard to preserve logo clear space. The two supplied logo files contain the same white artwork. Website fonts are self-hosted via Fontsource (Poppins 500 headings, DM Sans 300 body). Stock scenes in `src/assets/brand/` are illustrative, not portraits of staff or clients. Keep the actual founder headshot. `npm run assets` regenerates icons and social imagery from these SVGs.
+
+## Reference-content update
+
+The active homepage in `src/pages/index.astro` now matches the written content on golden-recruiting-1010.vercel.app: relationship-first positioning, family-owned introduction, values, three-stage process, employer/candidate sections, mission and vision. Navigation follows these sections. Contact uses hello@goldenrecruiting.com mailto links as on the reference; existing contact API and earlier section components remain in the repository but are not rendered on the homepage. No email-provider or environment changes were made.

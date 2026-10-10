@@ -1,5 +1,7 @@
 ---
 import SectionHead from './SectionHead.astro';
+import BrandPhoto from './BrandPhoto.astro';
+import brandPhoto from '../assets/brand/team-discussion.webp';
 
 const services = [
   {
@@ -31,11 +33,12 @@ const services = [
         <article class="bg-bg px-6 py-8 sm:px-[30px]">
           <h3 class="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 font-serif text-[21px] font-medium">
             {s.title}{' '}
-            <span class="font-sans text-sm text-gold">{s.mark}</span>
+            <span class="font-sans text-sm text-brand">{s.mark}</span>
           </h3>
           <p class="text-[15px] text-ink-dim">{s.body}</p>
         </article>
       ))}
     </div>
+    <BrandPhoto src={brandPhoto} alt="Three professionals discussing documents around an office table" />
   </div>
 </section>

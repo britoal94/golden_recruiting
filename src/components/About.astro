@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import SectionHead from './SectionHead.astro';
+import BrandPhoto from './BrandPhoto.astro';
+import brandPhoto from '../assets/brand/connection.webp';
 import founderPhoto from '../assets/founder.jpg';
 import { site } from '../config/site';
 ---
@@ -33,11 +35,12 @@ import { site } from '../config/site';
       />
       <div>
         <p class="mb-1 font-serif text-[22px] font-medium">{site.founder.name}</p>
-        <p class="mb-4 text-sm text-gold">{site.founder.title}</p>
+        <p class="mb-4 text-sm text-brand">{site.founder.title}</p>
         <p class="max-w-[60ch] text-base text-ink-dim">
           With over a decade in talent acquisition, {site.founder.shortName} has built her career helping financial services companies find and secure top talent.
         </p>
       </div>
     </div>
+    <BrandPhoto src={brandPhoto} alt="Professionals sharing a conversation around a table" />
   </div>
 </section>

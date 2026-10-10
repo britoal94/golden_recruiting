@@ -1,18 +1,16 @@
 ---
-import Seal from './Seal.astro';
 import { site, nav } from '../config/site';
 ---
 
-<header class="sticky top-0 z-20 border-b border-line bg-bg/[.88] backdrop-blur-md">
+<header class="sticky top-0 z-20 border-b border-line bg-ink text-white backdrop-blur-md">
   <div class="wrap flex items-center justify-between gap-4 py-4">
     <a href="#top" class="flex items-center gap-3 whitespace-nowrap font-serif text-[21px] tracking-[0.01em] no-underline" aria-label={`${site.name} — back to top`}>
-      <Seal class="h-[30px] w-[30px]" />
-      <span>{site.name}</span>
+      <img src="/brand/logo.svg" alt={site.name} width="240" height="69" class="h-auto w-[180px] shrink-0 sm:w-[220px]" />
     </a>
 
-    <nav class="hidden items-center gap-6 text-[14.5px] whitespace-nowrap text-ink-dim lg:flex xl:gap-8" aria-label="Primary">
+    <nav class="hidden items-center gap-6 text-[14.5px] whitespace-nowrap text-white lg:flex xl:gap-8" aria-label="Primary">
       {nav.map((item) => (
-        <a href={item.href} class="no-underline transition-colors duration-150 hover:text-gold-bright focus-visible:text-gold-bright">{item.label}</a>
+        <a href={item.href} class="no-underline transition-colors duration-150 hover:underline focus-visible:underline">{item.label}</a>
       ))}
     </nav>
 
@@ -21,7 +19,7 @@ import { site, nav } from '../config/site';
       <button
         type="button"
         id="menu-toggle"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-[3px] border border-line text-ink lg:hidden"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-[3px] border border-white/40 text-white lg:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label="Open menu"
@@ -37,7 +35,7 @@ import { site, nav } from '../config/site';
   <nav id="mobile-menu" class="hidden border-t border-line bg-bg lg:hidden" aria-label="Mobile">
     <div class="wrap flex flex-col py-2">
       {nav.map((item) => (
-        <a href={item.href} class="border-b border-line py-3.5 text-[16px] text-ink no-underline last:border-b-0 hover:text-gold-bright">{item.label}</a>
+        <a href={item.href} class="border-b border-line py-3.5 text-[16px] text-ink no-underline last:border-b-0 hover:text-brand-hover">{item.label}</a>
       ))}
       <a href="#contact" class="btn mt-3 mb-2 sm:hidden">Start a search</a>
     </div>

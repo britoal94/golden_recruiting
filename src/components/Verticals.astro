@@ -1,5 +1,7 @@
 ---
 import SectionHead from './SectionHead.astro';
+import BrandPhoto from './BrandPhoto.astro';
+import brandPhoto from '../assets/brand/partnership.webp';
 
 const secondary = [
   {
@@ -25,15 +27,15 @@ const secondary = [
       <article class="bg-bg px-6 py-8 sm:px-[30px]">
         <h3 class="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 font-serif text-[21px] font-medium">
           Financial Services &amp; Advisor Recruiting{' '}
-          <span class="font-sans text-sm text-gold">Primary focus</span>
+          <span class="font-sans text-sm text-brand">Primary focus</span>
         </h3>
         <div class="mt-1.5 grid gap-6 sm:grid-cols-2">
           <div>
-            <p class="mb-1 text-sm font-semibold text-gold-bright">Experienced Advisors</p>
+            <p class="mb-1 text-sm font-semibold text-brand-hover">Experienced Advisors</p>
             <p class="text-[15px] text-ink-dim">Advisors with portable, revenue-producing books, for banks and wealth-management platforms growing advisor headcount.</p>
           </div>
           <div>
-            <p class="mb-1 text-sm font-semibold text-gold-bright">Advisor Support &amp; Growth Roles</p>
+            <p class="mb-1 text-sm font-semibold text-brand-hover">Advisor Support &amp; Growth Roles</p>
             <p class="text-[15px] text-ink-dim">Associate advisors, client service, administrative, and business development talent supporting advisor teams and practice growth.</p>
           </div>
         </div>
@@ -43,11 +45,12 @@ const secondary = [
         <article class="bg-bg px-6 py-8 sm:px-[30px]">
           <h3 class="mb-2.5 flex flex-wrap items-baseline gap-x-2.5 font-serif text-[21px] font-medium">
             {v.title}{' '}
-            <span class="font-sans text-sm text-gold">{v.n}</span>
+            <span class="font-sans text-sm text-brand">{v.n}</span>
           </h3>
           <p class="text-[15px] text-ink-dim">{v.body}</p>
         </article>
       ))}
     </div>
+    <BrandPhoto src={brandPhoto} alt="Two professionals walking together through a sunlit hallway" />
   </div>
 </section>

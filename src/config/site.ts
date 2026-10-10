@@ -6,9 +6,9 @@
 export const site = {
   name: 'Golden Recruiting',
   legalName: 'Golden Recruiting',
-  tagline: 'Strategic recruiting for the financial services industry.',
+  tagline: 'Great hires start with great connections.',
   description:
-    'Golden Recruiting is a Charlotte, NC recruiting and practice consulting firm specializing in experienced financial advisors with portable books, advisor support roles, sales and executive search — running every search end to end.',
+    'Golden Recruiting connects employers and talent through real conversations, trusted relationships, and a genuinely personal approach to finding the right fit.',
   locale: 'en_US',
   location: {
     city: 'Charlotte',
@@ -23,7 +23,7 @@ export const site = {
   contact: {
     // Leave empty until confirmed; the UI hides empty rows.
     phone: '',
-    email: 'bri@goldenrecruiting.com',
+    email: 'hello@goldenrecruiting.com',
   } as { phone: string; email: string },
   social: {
     linkedin: '',
@@ -42,9 +42,8 @@ export const site = {
 
 export const nav = [
   { href: '#about', label: 'About' },
-  { href: '#verticals', label: 'Verticals' },
-  { href: '#services', label: 'Services' },
+  { href: '#values', label: 'Values' },
   { href: '#process', label: 'Process' },
-  { href: '#why', label: 'Why Golden' },
+  { href: '#connections', label: 'Connections' },
   { href: '#contact', label: 'Contact' },
 ] as const;
