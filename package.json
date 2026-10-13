@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/vercel": "^11.0.11",
+    "@astrojs/vercel": "^11.0.12",
     "@tailwindcss/vite": "^4.3.3",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^7.3.5",
+    "astro": "^7.3.7",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-email": "^6.11.0",
-    "resend": "^6.31.0",
+    "react-email": "^6.11.1",
+    "resend": "^6.32.1",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
