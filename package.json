@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/vercel": "^11.0.12",
+    "@astrojs/vercel": "^11.0.14",
     "@tailwindcss/vite": "^4.3.3",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^7.3.7",
+    "astro": "^7.3.8",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-email": "^6.11.1",
