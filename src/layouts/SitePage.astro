@@ -1,0 +1,36 @@
+---
+import Base from "./Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  intro?: string;
+}
+const { title, description, heading, intro } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Nav />
+  <main id="main">
+    <section
+      class="border-b border-line bg-bg-raised py-16 sm:py-24"
+      aria-labelledby="page-heading"
+    >
+      <div class="wrap">
+        <h1
+          id="page-heading"
+          class="max-w-[24ch] text-[clamp(36px,5vw,60px)] leading-[1.15]"
+        >
+          {heading}
+        </h1>
+        <slot name="hook" />
+        {intro && <p class="mt-6 max-w-[65ch] text-lg text-ink-dim">{intro}</p>}
+        <slot name="hero" />
+      </div>
+    </section>
+    <slot />
+  </main>
+  <Footer />
+</Base>

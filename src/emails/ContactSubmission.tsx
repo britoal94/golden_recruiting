@@ -22,6 +22,7 @@ export interface ContactSubmissionProps {
   name: string;
   email: string;
   role: string;
+  companyName?: string;
   message: string;
   /** ISO timestamp of the submission. */
   receivedAt: string;
@@ -31,7 +32,7 @@ export interface ContactSubmissionProps {
 const SITE_URL = 'https://goldenrecruiting.com';
 const LOGO_URL = `${SITE_URL}/icon-192.png`;
 
-export function ContactSubmission({ name, email, role, message, receivedAt }: ContactSubmissionProps) {
+export function ContactSubmission({ name, email, role, companyName, message, receivedAt }: ContactSubmissionProps) {
   const received = new Date(receivedAt).toLocaleString('en-US', {
     timeZone: 'America/New_York',
     dateStyle: 'medium',
@@ -102,6 +103,10 @@ export function ContactSubmission({ name, email, role, message, receivedAt }: Co
                     </Link>
                   </Column>
                 </Row>
+                {companyName && <Row>
+                  <Column className="w-[110px] py-3 text-[13px] text-ink-dim">Company</Column>
+                  <Column className="py-3 text-[15px] text-ink">{companyName}</Column>
+                </Row>}
                 <Row>
                   <Column className="w-[110px] py-3 text-[13px] text-ink-dim">I am</Column>
                   <Column className="py-3 text-[15px] text-ink">{role}</Column>

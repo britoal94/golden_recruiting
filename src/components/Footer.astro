@@ -1,5 +1,5 @@
 ---
-import { site } from '../config/site';
+import { site, nav } from '../config/site';
 
 // Temporal is native in V8 (Node 26+ unflagged; Node 24 via --harmony-temporal,
 // which the npm scripts pass to the astro CLI). Computed at build time in the
@@ -8,7 +8,11 @@ const today = Temporal.Now.plainDateISO('America/New_York');
 ---
 
 <footer class="wrap flex flex-wrap items-center justify-between gap-3 pt-9 pb-12 text-[13.5px] text-ink-dim">
-  <a href="#top" aria-label={`${site.name} — back to top`} class="inline-block rounded bg-ink p-3"><img src="/brand/logo.svg" alt={site.name} width="200" height="57" class="h-auto w-[200px]" /></a>
+  <a href="/" aria-label={`${site.name} — home`} class="inline-block rounded bg-ink p-3"><img src="/brand/logo.svg" alt={site.name} width="200" height="57" class="h-auto w-[200px]" /></a>
+  <nav aria-label="Footer" class="flex flex-wrap gap-4">
+    {[...nav, { href: '/contact', label: 'Contact' }].map(item => <a href={item.href} class="hover:underline">{item.label}</a>)}
+  </nav>
+  <a href={`mailto:${site.contact.email}`} class="text-brand underline">{site.contact.email}</a>
   <span>
     © <time datetime={today.toString()}>{today.year}</time> {site.legalName} · {site.location.city}, {site.location.region}
   </span>

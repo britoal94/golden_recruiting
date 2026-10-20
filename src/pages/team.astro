@@ -1,0 +1,65 @@
+---
+import SitePage from "../layouts/SitePage.astro";
+import { Image } from "astro:assets";
+import founder from "../assets/founder.jpg";
+---
+
+<SitePage
+  title={"Meet Bri Toal — Golden Recruiting"}
+  description={
+    "Meet Briana Toal, founder of Golden Recruiting. Over a decade in talent acquisition and a personal approach to every search."
+  }
+  heading={"Hi, I'm Bri."}
+  intro={
+    "I founded Golden Recruiting to make hiring feel more human, for the companies doing it and the people going through it."
+  }
+>
+  <section aria-labelledby="story" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="story" class="text-3xl leading-snug">
+        My story
+      </h2>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        I've spent more than a decade in talent acquisition, helping companies
+        find and bring on the people who move them forward.
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        Every search is different: a technical builder one month, a trusted
+        advisor or a senior leader the next. The work is the same: understand
+        people well enough to know where they'll thrive.
+      </p>
+      <div class="mt-8">
+        <Image
+          src={founder}
+          alt="Briana Toal, founder of Golden Recruiting"
+          width={480}
+          height={480}
+          widths={[320, 480]}
+          sizes="(max-width: 640px) 100vw, 480px"
+          class="h-auto w-full max-w-[480px] rounded-lg"
+        />
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="based" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="based" class="text-3xl leading-snug">
+        Based in Charlotte, working everywhere
+      </h2>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        We're rooted in Charlotte, North Carolina, and run searches for teams
+        across the country.
+      </p>
+    </div>
+  </section>
+  <section aria-labelledby="hello" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="hello" class="text-3xl leading-snug">
+        I'd love to hear what you're building.
+      </h2>
+      <a class="btn mt-6" href="/contact">
+        Say hello
+      </a>
+    </div>
+  </section>
+</SitePage>

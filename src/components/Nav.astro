@@ -4,7 +4,7 @@ import { site, nav } from '../config/site';
 
 <header class="sticky top-0 z-20 border-b border-line bg-ink text-white backdrop-blur-md">
   <div class="wrap flex items-center justify-between gap-4 py-4">
-    <a href="#top" class="flex items-center gap-3 whitespace-nowrap font-serif text-[21px] tracking-[0.01em] no-underline" aria-label={`${site.name} — back to top`}>
+    <a href="/" class="flex items-center gap-3 whitespace-nowrap font-serif text-[21px] tracking-[0.01em] no-underline" aria-label={`${site.name} — home`}>
       <img src="/brand/logo.svg" alt={site.name} width="240" height="69" class="h-auto w-[180px] shrink-0 sm:w-[220px]" />
     </a>
 
@@ -15,7 +15,7 @@ import { site, nav } from '../config/site';
     </nav>
 
     <div class="flex items-center gap-3">
-      <a href="#contact" class="btn hidden whitespace-nowrap sm:inline-flex">Start a search</a>
+      <a href="/contact" class="btn hidden whitespace-nowrap sm:inline-flex">Contact</a>
       <button
         type="button"
         id="menu-toggle"
@@ -37,7 +37,7 @@ import { site, nav } from '../config/site';
       {nav.map((item) => (
         <a href={item.href} class="border-b border-line py-3.5 text-[16px] text-ink no-underline last:border-b-0 hover:text-brand-hover">{item.label}</a>
       ))}
-      <a href="#contact" class="btn mt-3 mb-2 sm:hidden">Start a search</a>
+      <a href="/contact" class="btn mt-3 mb-2 sm:hidden">Contact</a>
     </div>
   </nav>
 </header>

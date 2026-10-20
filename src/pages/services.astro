@@ -1,0 +1,241 @@
+---
+import SitePage from "../layouts/SitePage.astro";
+import BrandPhoto from "../components/BrandPhoto.astro";
+import handshake from "../assets/brand/handshake.webp";
+---
+
+<SitePage
+  title={"Recruiting Services — RPO, Container, Contingent"}
+  description={
+    "Three ways to work with Golden Recruiting: RPO, container search, and contingent search. See how a search runs, step by step."
+  }
+  heading={"Ways to work with us"}
+  intro={
+    "Every company hires differently, so we offer three ways to engage. Not sure which fits? Tell us what you're hiring for and we'll recommend one, honestly."
+  }
+>
+  <section
+    aria-labelledby="recruitment"
+    class="border-b border-line py-14 sm:py-20"
+  >
+    <div class="wrap">
+      <h2 id="recruitment" class="text-3xl leading-snug">
+        Recruitment process outsourcing (RPO)
+      </h2>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        Your recruiting team, on call
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        We work as an extension of your team for ongoing or high-volume hiring.
+        We handle sourcing, screening, and pipeline management under one
+        program, so you're not starting from zero with each new role.
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        Best for: Growing teams with several hires ahead.
+      </p>
+    </div>
+  </section>
+  <section
+    aria-labelledby="contingent"
+    class="border-b border-line py-14 sm:py-20"
+  >
+    <div class="wrap">
+      <h2 id="contingent" class="text-3xl leading-snug">
+        Contingent search
+      </h2>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">Pay when we place</p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        You pay a fee only when someone we introduced accepts your offer. It's a
+        good fit for a single role, or for getting to know us before committing
+        to more.
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        Best for: One-off hires and first-time clients.
+      </p>
+    </div>
+  </section>
+  <section
+    aria-labelledby="container"
+    class="border-b border-line py-14 sm:py-20"
+  >
+    <div class="wrap">
+      <h2 id="container" class="text-3xl leading-snug">
+        Container search
+      </h2>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        Priority attention, shared commitment
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        A modest upfront fee reserves our dedicated time for your search and is
+        credited toward the placement fee. You get the focus of a retained
+        search without the full retainer.
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        Best for: Roles that are urgent, senior, or hard to fill.
+      </p>
+    </div>
+  </section>
+  <section aria-labelledby="compare" class="border-b border-line py-14">
+    <div class="wrap">
+      <h2 id="compare" class="text-3xl">
+        Ways to work with us
+      </h2>
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full min-w-[600px] text-left">
+          <caption class="sr-only">Compare our recruiting services</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="p-4"></th>
+              <th scope="col" class="p-4">
+                RPO
+              </th>
+              <th scope="col" class="p-4">
+                Container
+              </th>
+              <th scope="col" class="p-4">
+                Contingent
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-line">
+              <th scope="row" class="p-4">
+                When you pay
+              </th>
+              <td class="p-4 text-ink-dim">Ongoing program fee</td>
+              <td class="p-4 text-ink-dim">Part upfront, rest on hire</td>
+              <td class="p-4 text-ink-dim">On hire only</td>
+            </tr>
+            <tr class="border-t border-line">
+              <th scope="row" class="p-4">
+                Our commitment
+              </th>
+              <td class="p-4 text-ink-dim">Embedded with your team</td>
+              <td class="p-4 text-ink-dim">Dedicated, priority search</td>
+              <td class="p-4 text-ink-dim">Active search</td>
+            </tr>
+            <tr class="border-t border-line">
+              <th scope="row" class="p-4">
+                Best for
+              </th>
+              <td class="p-4 text-ink-dim">Multiple or ongoing hires</td>
+              <td class="p-4 text-ink-dim">Urgent or senior roles</td>
+              <td class="p-4 text-ink-dim">Single roles</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="steps" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="steps" class="text-3xl leading-snug">
+        What to expect, step by step
+      </h2>
+      <ol class="mt-8 grid gap-8 md:grid-cols-3">
+        <li class="border-t border-line pt-5">
+          <p class="text-brand" aria-hidden="true">
+            01
+          </p>
+          <h3 class="mt-3 text-xl">Intake call</h3>
+          <p class="mt-4 max-w-[70ch] text-ink-dim">
+            We start with a real conversation about the role, the team, and what
+            success looks like. A job description tells us the requirements. You
+            tell us the rest. Then we go to the people: direct outreach,
+            referrals, and our own network.
+          </p>
+        </li>
+        <li class="border-t border-line pt-5">
+          <p class="text-brand" aria-hidden="true">
+            02
+          </p>
+          <h3 class="mt-3 text-xl">Review the short list</h3>
+          <p class="mt-4 max-w-[70ch] text-ink-dim">
+            We interview each person against your brief, then walk you through
+            the first profiles with our notes on why each one is there. Your
+            reactions sharpen the search.
+          </p>
+        </li>
+        <li class="border-t border-line pt-5">
+          <p class="text-brand" aria-hidden="true">
+            03
+          </p>
+          <h3 class="mt-3 text-xl">Interview and hire</h3>
+          <p class="mt-4 max-w-[70ch] text-ink-dim">
+            You meet the people worth meeting. We help with the offer, the
+            negotiation, and the nerves on both sides, and we stay in touch
+            through the start date and beyond.
+          </p>
+        </li>
+      </ol>
+      <BrandPhoto
+        src={handshake}
+        alt="Two professionals shaking hands in an office"
+      />
+    </div>
+  </section>
+  <section aria-labelledby="faq" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="faq" class="text-3xl leading-snug">
+        FAQ
+      </h2>
+      <details class="border-b border-line py-5">
+        <summary class="cursor-pointer font-medium">
+          How much does it cost?
+        </summary>
+        <p class="mt-4 max-w-[70ch] text-ink-dim">
+          It depends on how you engage us. Contingent searches are billed only
+          on placement. Container searches include a smaller upfront fee
+          credited toward the placement fee. RPO is a program fee. We'll walk
+          you through exact terms on our first call.
+        </p>
+      </details>
+      <details class="border-b border-line py-5">
+        <summary class="cursor-pointer font-medium">
+          How long does a search take?
+        </summary>
+        <p class="mt-4 max-w-[70ch] text-ink-dim">
+          It varies by role and seniority. We'll give you a realistic timeline
+          before we start.
+        </p>
+      </details>
+      <details class="border-b border-line py-5">
+        <summary class="cursor-pointer font-medium">
+          Do you only work in Charlotte?
+        </summary>
+        <p class="mt-4 max-w-[70ch] text-ink-dim">
+          No. We're based in Charlotte and run searches across the country, for
+          on-site, hybrid, and remote roles.
+        </p>
+      </details>
+      <details class="border-b border-line py-5">
+        <summary class="cursor-pointer font-medium">
+          Who will I be working with?
+        </summary>
+        <p class="mt-4 max-w-[70ch] text-ink-dim">
+          Bri, our founder. She runs your search and is your point of contact
+          from the first call to the start date.
+        </p>
+      </details>
+      <details class="border-b border-line py-5">
+        <summary class="cursor-pointer font-medium">
+          How many candidates will I see?
+        </summary>
+        <p class="mt-4 max-w-[70ch] text-ink-dim">
+          Usually a short list of people we've already interviewed. We'd rather
+          send a few strong fits than a long list to sort through.
+        </p>
+      </details>
+    </div>
+  </section>
+  <section aria-labelledby="start" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="start" class="text-3xl leading-snug">
+        Ready to talk through a role?
+      </h2>
+      <a class="btn mt-6" href="/contact">
+        Start a search
+      </a>
+    </div>
+  </section>
+</SitePage>

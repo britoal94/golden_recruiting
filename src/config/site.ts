@@ -6,9 +6,9 @@
 export const site = {
   name: 'Golden Recruiting',
   legalName: 'Golden Recruiting',
-  tagline: 'Great hires start with great connections.',
+  tagline: 'Founder-Led Recruiting',
   description:
-    'Golden Recruiting connects employers and talent through real conversations, trusted relationships, and a genuinely personal approach to finding the right fit.',
+    "Founder-led recruiting firm in Charlotte, NC. We find and vet the hard-to-hire builders, advisors, and leaders your team needs, nationwide.",
   locale: 'en_US',
   location: {
     city: 'Charlotte',
@@ -23,27 +23,20 @@ export const site = {
   contact: {
     // Leave empty until confirmed; the UI hides empty rows.
     phone: '',
-    email: 'hello@goldenrecruiting.com',
+    email: 'bri@goldenrecruiting.com',
   } as { phone: string; email: string },
   social: {
     linkedin: '',
   } as { linkedin: string },
   foundingYear: 2026,
   /** Keywords are informational only — search engines ignore the meta tag, but they inform copy. */
-  keywords: [
-    'financial advisor recruiting',
-    'financial services recruiting',
-    'wealth management recruiter',
-    'advisor recruiting Charlotte NC',
-    'executive search financial services',
-    'RPO financial services',
-  ],
+  keywords: ['founder-led recruiting', 'executive search', 'recruitment process outsourcing', 'Charlotte recruiter'],
 } as const;
 
 export const nav = [
-  { href: '#about', label: 'About' },
-  { href: '#values', label: 'Values' },
-  { href: '#process', label: 'Process' },
-  { href: '#connections', label: 'Connections' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/team', label: 'Team' },
+  { href: '/mission', label: 'Mission' },
+  { href: '/apply', label: 'Apply' },
 ] as const;

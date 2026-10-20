@@ -1,0 +1,72 @@
+---
+import SitePage from "../layouts/SitePage.astro";
+---
+
+<SitePage
+  title={"Our Mission — Golden Recruiting"}
+  description={
+    "Why Golden Recruiting exists: to make hiring feel human again, for the companies doing it and the people going through it."
+  }
+  heading={"Why we do this"}
+  intro={
+    "Hiring is one of the most personal decisions a company makes. It deserves a personal approach."
+  }
+>
+  <section
+    aria-labelledby="mission"
+    class="border-b border-line py-14 sm:py-20"
+  >
+    <div class="wrap">
+      <h2 id="mission" class="text-3xl leading-snug">
+        Our mission
+      </h2>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        To make hiring feel human again, for the companies doing it and the
+        people going through it.
+      </p>
+      <p class="mt-4 max-w-[70ch] text-ink-dim">
+        We've seen what happens when a hire is rushed: good people in the wrong
+        seats, and teams paying for it. We've also seen what one right hire can
+        do. Golden exists to make the second story more common.
+      </p>
+    </div>
+  </section>
+  <section
+    aria-labelledby="beliefs"
+    class="border-b border-line py-14 sm:py-20"
+  >
+    <div class="wrap">
+      <h2 id="beliefs" class="text-3xl leading-snug">
+        What we believe
+      </h2>
+      <ul class="mt-6 space-y-5 text-ink-dim">
+        <li>
+          Hiring is about people, not paperwork. A resume tells you where
+          someone has been. A conversation tells you where they're going.
+        </li>
+        <li>
+          Honesty is a kindness. We tell clients when a search needs rethinking,
+          and we tell candidates when a role isn't right for them.
+        </li>
+        <li>
+          Small is a strength. Golden is founder-led on purpose. You get Bri's
+          attention, her network, and her name on the work.
+        </li>
+        <li>
+          The job isn't done at the offer. We check in after the start date,
+          with you and with the person you hired.
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section aria-labelledby="book" class="border-b border-line py-14 sm:py-20">
+    <div class="wrap">
+      <h2 id="book" class="text-3xl leading-snug">
+        Sound like the way you'd want to hire?
+      </h2>
+      <a class="btn mt-6" href="/contact">
+        Book a call
+      </a>
+    </div>
+  </section>
+</SitePage>

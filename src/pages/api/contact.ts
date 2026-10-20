@@ -17,7 +17,7 @@ function respond(request: Request, status: number, body: { ok: boolean; error?: 
   }
   // Plain HTML form post (no JS): bounce back to the contact section with a flag.
   const flag = body.ok ? 'sent=1' : 'error=1';
-  return new Response(null, { status: 303, headers: { Location: `/?${flag}#contact` } });
+  return new Response(null, { status: 303, headers: { Location: `/contact?${flag}#contact` } });
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -35,6 +35,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const name = String(data.get('name') ?? '').trim().slice(0, 120);
   const email = String(data.get('email') ?? '').trim().slice(0, 200);
+  const companyName = String(data.get('companyName') ?? '').trim().slice(0, 200);
   const roleRaw = String(data.get('role') ?? '').trim();
   const role = ROLES.has(roleRaw) ? roleRaw : 'Something else';
   const message = String(data.get('message') ?? '').trim().slice(0, 5000);
@@ -59,14 +60,15 @@ export const POST: APIRoute = async ({ request }) => {
 
   const resend = new Resend(apiKey);
   const subject = `[${site.name}] ${role} — ${name}`;
-  const text = `Name: ${name}\nEmail: ${email}\nI am: ${role}\n\n${message}`;
+  const text = `Name: ${name}\nEmail: ${email}\nCompany: ${companyName}\nI am: ${role}\n\n${message}`;
   // Same submission retried (e.g. flaky network) within 24h is delivered once.
-  const idempotencyKey = `contact-form/${createHash('sha256').update(`${email}\n${message}`).digest('hex').slice(0, 32)}`;
+  const idempotencyKey = `contact-form/${createHash('sha256').update(`${name}\n${email}\n${companyName}\n${role}\n${message}`).digest('hex').slice(0, 32)}`;
 
   const react = createElement(ContactSubmission, {
     name,
     email,
     role,
+    companyName,
     message,
     receivedAt: new Date().toISOString(),
   });
